@@ -15,3 +15,6 @@ Hour idk (3:30):
 
 Hour 42 (05:30):
 - Keri: I think I am starting to get the hang of this
+
+Hour 43 (7:00):
+- Anthony: 2 sleep or not 2 sleep

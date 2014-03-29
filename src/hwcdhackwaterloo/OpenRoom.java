@@ -60,6 +60,7 @@ public class OpenRoom {
 		*/
 		
 		//Commented out block is a Console interface for testing findDistance function
+		// commented out for testing System.out.println(roomComp("RCH", 20, 3, 28));
 		
 	}
 	
@@ -97,7 +98,7 @@ public class OpenRoom {
 	//version of a building, and from that it will give the closest
 	//building, and how long an empty room in said building will
 	//be available for
-	public String roomComp(String bldg, int desiredTime, int month, int day)
+	public static String roomComp(String bldg, int desiredTime, int month, int day)
 	{
 		String json = getJSONData("/buildings/list");
         JSONObject obj = (JSONObject) JSONValue.parse(json);
@@ -187,13 +188,16 @@ public class OpenRoom {
         	ignoreRooms[ignoreIndex] = closestBldg; //if a re-iteration is necessary, ignore this room
         	ignoreIndex++;
         	
-        	for(int i = 99; i < 9001 ; i++)
+        	int[] rooms = building_rooms.get(closestBldg);
+        	int len  = rooms.length;
+        	
+        	for(int i = 0; i < len ; i++)
       	   	{
-      		   freeMins = cra.checkRoomAvailability(closestBldg, i, dayOfWeek, totalMins);
+      		   freeMins = cra.checkRoomAvailability(closestBldg, rooms[i], dayOfWeek, totalMins);
       		   if(freeMins==-1)//end of day case
       		   {
       			   roomFound = true;
-      			   return closestBldg + " room " + i + " will be open for the rest of the day";
+      			   return closestBldg + " room " + rooms[i] + " will be open for the rest of the day";
       			 
       		   }
       		   if(freeMins==-2)//weekend case
@@ -205,7 +209,7 @@ public class OpenRoom {
       		   if(freeMins>desiredTime)//everything else
       		   {
       			   roomFound = true;
-      			   return closestBldg + " room " + i + " will be open for " + freeMins + " Minutes ";
+      			   return closestBldg + " room " + rooms[i] + " will be open for " + freeMins + " Minutes ";
       			   
       		   }
       	   }

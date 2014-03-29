@@ -5,9 +5,15 @@
  */
 package hwcdhackwaterloo;
 
+import static hwcdhackwaterloo.UWAPI.getJSONData;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.Box;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -53,9 +59,11 @@ public class GUIMain extends javax.swing.JFrame {
         topPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         roomChoice = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
         middlePanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fuck_Nuts");
@@ -85,7 +93,7 @@ public class GUIMain extends javax.swing.JFrame {
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addComponent(titleLabel)
                 .addGap(106, 106, 106)
                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -109,29 +117,48 @@ public class GUIMain extends javax.swing.JFrame {
         jLabel1.setText("SEARCH FOR AVILABLE ROOMS");
 
         roomChoice.setBackground(new java.awt.Color(150, 150, 150));
-        roomChoice.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "MC", "SLC", "SPC" }));
-        roomChoice.addItem("test");
+        roomChoice.addItem("MC");
+        String json = getJSONData("/buildings/list");
+        JSONObject obj = (JSONObject) JSONValue.parse(json);
+        JSONArray courses = (JSONArray) obj.get("data");
+        ArrayList<String> buildingNames = new ArrayList<>();
+        for (Object course : courses) {
+            JSONObject courseBlock = (JSONObject) course;
+            buildingNames.add(courseBlock.get("building_code").toString());
+        }
+        Collections.sort(buildingNames);
+        for(String buildingName : buildingNames){
+            roomChoice.addItem(buildingName);
+        }
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(250, 250, 250));
+        jLabel3.setText("SELECT CLOSEST BUILDING YOU FUCK");
 
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(109, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(96, 96, 96))
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(roomChoice, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(roomChoice, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(roomChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(roomChoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 92, Short.MAX_VALUE))
         );
 
         middlePanel.setBackground(new java.awt.Color(0, 129, 16));
@@ -162,20 +189,29 @@ public class GUIMain extends javax.swing.JFrame {
         middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(middlePanelLayout.createSequentialGroup()
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 141, Short.MAX_VALUE))
+            .addGap(0, 149, Short.MAX_VALUE))
     );
 
     bottomPanel.setBackground(new java.awt.Color(159, 238, 0));
+
+    jLabel4.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+    jLabel4.setText("WIDGET PENDING");
 
     javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
     bottomPanel.setLayout(bottomPanelLayout);
     bottomPanelLayout.setHorizontalGroup(
         bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 0, Short.MAX_VALUE)
+        .addGroup(bottomPanelLayout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     bottomPanelLayout.setVerticalGroup(
         bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 168, Short.MAX_VALUE)
+        .addGroup(bottomPanelLayout.createSequentialGroup()
+            .addGap(34, 34, 34)
+            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(33, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,7 +229,7 @@ public class GUIMain extends javax.swing.JFrame {
             .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGap(1, 1, 1)
             .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -249,6 +285,8 @@ public class GUIMain extends javax.swing.JFrame {
     private javax.swing.JButton closeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel middlePanel;
     private javax.swing.JComboBox roomChoice;

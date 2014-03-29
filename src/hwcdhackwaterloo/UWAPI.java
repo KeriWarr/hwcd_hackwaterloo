@@ -16,11 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class UWAPI {
     
-<<<<<<< HEAD
-    private static String url = "https://api.uwaterloo.ca/v2{data}.json?key=d2c261c316afdccfac2eb9cbd1398d03";
-=======
     private static String url = "https://api.uwaterloo.ca/v2{data}.json?key=d0c88e35751c0e88b31dd90c79682127";
->>>>>>> ca48d035ea5310102480b49d4bcf2c18e894e23d
     
     /**
      * Parses the specified data from UW API.

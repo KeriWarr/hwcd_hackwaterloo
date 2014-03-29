@@ -3,9 +3,6 @@ package gui_test;
 import java.awt.Color;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import java.awt.BorderLayout;
@@ -17,19 +14,19 @@ import java.awt.event.MouseEvent;
 
 public class Main_View {
 	
-	private static JButton createSimpleButton(String text){
-		  JButton button = new JButton(text);
-		  button.setForeground(Color.BLACK);
-		  button.setBackground(Color.WHITE);
-		  Border line = new LineBorder(Color.BLACK);
-		  Border margin = new EmptyBorder(5, 15, 5, 15);
-		  Border compound = new CompoundBorder(line, margin);
-		  button.setBorder(compound);
-		  return button;
-	}
-	
+	final static int g = 96;       // grey color 1
+	final static int g2 = g - g/2; // grey color 2
 	static int posX = 0;
 	static int posY = 0;
+	
+	private static JButton createSimpleButton(String text){
+		  JButton button = new JButton(text);
+		  button.setForeground(Color.WHITE);
+		  Color c = new Color(g2,g2,g2);
+		  button.setBackground(c);
+		  button.setBorder(new LineBorder(c, 12));
+		  return button;
+	}
 	
 	public static void main(String[] args) {
 			
@@ -41,14 +38,14 @@ public class Main_View {
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setSize(500, 300);
 				frame.setUndecorated(true);
-				final int g = 96;
+				
 				frame.getContentPane().setBackground(new Color(g,g,g));
 				
 				// panel for closing and moving the main frame
 				JPanel panel = new JPanel();
 				frame.getContentPane().add(panel, BorderLayout.NORTH);
-				final int g2 = g - g/2;
 				panel.setBackground(new Color(g2,g2,g2));
+				panel.setLayout(new BorderLayout());
 				
 				// Movement
 				panel.addMouseListener(new MouseAdapter() {
@@ -82,16 +79,16 @@ public class Main_View {
 				});
 				
 				// label title
-				JLabel lblHwcdHackwaterloo = new JLabel("HWcd hackWaterloo");
+				JLabel lblHwcdHackwaterloo = new JLabel("   HWcd hackWaterloo");
 				lblHwcdHackwaterloo.setForeground(new Color(255, 255, 255));
 				lblHwcdHackwaterloo.setBackground(new Color(255, 255, 255));
 				lblHwcdHackwaterloo.setFont(new Font("Arial", Font.BOLD, 12));
-				panel.add(lblHwcdHackwaterloo);
+				panel.add(lblHwcdHackwaterloo, BorderLayout.CENTER);
 				
 				// close button
 				JButton btnClose = createSimpleButton("CLOSE");
 				btnClose.setFont(new Font("Arial", Font.BOLD, 11));
-				panel.add(btnClose);
+				panel.add(btnClose, BorderLayout.EAST);
 				// event listener to button
 				btnClose.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {

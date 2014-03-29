@@ -24,6 +24,10 @@ public class TimeAvailability {
         JSONArray courses = (JSONArray) obj.get("data");
         ArrayList<TimeBlock> booked = new ArrayList<TimeBlock>();
 
+        if(day=="S")
+        {
+        	return -2; //Weekend special case sentinel value
+        }
         if(meta.get("message").toString().equals("No data returned")){
             return 0;
         }
@@ -38,8 +42,48 @@ public class TimeAvailability {
                 insert_timeblock(booked, item);
             }
         }
+        
+        int bookings = booked.size();
+        System.out.println("THIS IS THE SIZE OF BOOKED: " + bookings);
+        for(int i = 0; i < bookings; i++)
+        {
+        	System.out.println("Start time " + i + ": " + booked.get(i).start_time);
+        	System.out.println("End time " + i + ": " + booked.get(i).end_time);
 
-        return 0;
+        }
+        //System.out.println("Here is the first booking:" + booked.get(0).start_time);
+        if(bookings==0)
+        {
+        	return 0;
+        }
+        else
+        {
+        	for(int i = 0; i < bookings-1; i++)
+        	{
+        		if(booked.get(i).start_time < min && booked.get(i).end_time > min)
+        		{
+        			//booked at this time, do nothing
+        		}
+        		else if(booked.get(i).end_time < min && booked.get(i+1).start_time > min)
+        		{
+        			//given time is between previous end time and next start time
+        			return (booked.get(i+1).start_time - min); //how long the room is free for
+        		}
+        		else if(booked.get(i).start_time > min) //if current time is before given start time
+        		{
+        			if(i==0) //if first booking, it's already free at this point
+        				return (booked.get(i).start_time - min); //how long the room is free for
+        			else if(booked.get(i-1).end_time < min) //if not first booking, test if it's after previous ending time
+        				return (booked.get(i).start_time - min); //how long the room is free for
+        		}
+        	}
+        
+        	if(booked.get(bookings-1).end_time < min)
+        	{
+        		return -1; //free for rest of day sentinel value
+        	}
+        }
+       return 0;
 	}
 	
 	// assuming no overlap in times, unless one time block starts at the same time but ends later

@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 /bin
+=======
+build.xml
+manifest.mf
+/nbproject/
+/build/
+>>>>>>> d9d7d7e40bb5a9bc526284654a2b07f83036c877

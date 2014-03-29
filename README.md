@@ -12,3 +12,6 @@ Hour 2 (11:30):
 
 Hour idk (3:30):
 - Anthony: dunno
+
+Hour 42 (05:30):
+- Keri: I think I am starting to get the hang of this

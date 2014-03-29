@@ -51,18 +51,24 @@ public class GUIMain extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
         topPanel = new javax.swing.JPanel();
-        topLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        roomChoice = new javax.swing.JComboBox();
         middlePanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fuck_Nuts");
         setBackground(new java.awt.Color(0, 0, 0));
+        setForeground(java.awt.Color.pink);
         setUndecorated(true);
         setResizable(false);
 
+        menuPanel.setBackground(new java.awt.Color(10, 10, 10));
+
         titleLabel.setBackground(new java.awt.Color(255, 255, 255));
         titleLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 18)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(230, 230, 230));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         titleLabel.setText("HWCD hackWATERLOO");
 
@@ -95,80 +101,107 @@ public class GUIMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        topPanel.setBackground(new java.awt.Color(255, 30, 50));
+        topPanel.setBackground(new java.awt.Color(135, 0, 71));
         topPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        topLabel.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        topLabel.setForeground(new java.awt.Color(240, 240, 240));
-        topLabel.setText("Stuff Here");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(250, 250, 250));
+        jLabel1.setText("SEARCH FOR AVILABLE ROOMS");
+
+        roomChoice.setBackground(new java.awt.Color(150, 150, 150));
+        roomChoice.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "MC", "SLC", "SPC" }));
+        roomChoice.addItem("test");
 
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(96, 96, 96))
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(topLabel)
+                .addGap(63, 63, 63)
+                .addComponent(roomChoice, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(topLabel)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(roomChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 87, Short.MAX_VALUE))
         );
 
-        middlePanel.setBackground(new java.awt.Color(0, 153, 153));
+        middlePanel.setBackground(new java.awt.Color(0, 129, 16));
+        middlePanel.setForeground(new java.awt.Color(240, 240, 240));
 
-        javax.swing.GroupLayout middlePanelLayout = new javax.swing.GroupLayout(middlePanel);
-        middlePanel.setLayout(middlePanelLayout);
-        middlePanelLayout.setHorizontalGroup(
-            middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        middlePanelLayout.setVerticalGroup(
-            middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 159, Short.MAX_VALUE)
-        );
+        int randomNum = (int)(Math.random()*3);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18));
+        jLabel2.setForeground(new java.awt.Color(250, 250, 250));
+        if(randomNum == 0){
+            jLabel2.setText("DIS ROOM BE AVAILABLE:");
+        }else if(randomNum == 1){
+            jLabel2.setText("HERE IS YOUR DESTINATION:");
+        }else{
+            jLabel2.setText("WALK THIS WAY:");
+        }
+        //}
 
-        bottomPanel.setBackground(new java.awt.Color(159, 238, 0));
+    javax.swing.GroupLayout middlePanelLayout = new javax.swing.GroupLayout(middlePanel);
+    middlePanel.setLayout(middlePanelLayout);
+    middlePanelLayout.setHorizontalGroup(
+        middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(middlePanelLayout.createSequentialGroup()
+            .addGap(84, 84, 84)
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    middlePanelLayout.setVerticalGroup(
+        middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(middlePanelLayout.createSequentialGroup()
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 141, Short.MAX_VALUE))
+    );
 
-        javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
-        bottomPanel.setLayout(bottomPanelLayout);
-        bottomPanelLayout.setHorizontalGroup(
-            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        bottomPanelLayout.setVerticalGroup(
-            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 159, Short.MAX_VALUE)
-        );
+    bottomPanel.setBackground(new java.awt.Color(159, 238, 0));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(middlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(topPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+    javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
+    bottomPanel.setLayout(bottomPanelLayout);
+    bottomPanelLayout.setHorizontalGroup(
+        bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 0, Short.MAX_VALUE)
+    );
+    bottomPanelLayout.setVerticalGroup(
+        bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 168, Short.MAX_VALUE)
+    );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bottomPanel, middlePanel});
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(middlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(topPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+    );
 
-        pack();
+    layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bottomPanel, middlePanel, topPanel});
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
@@ -214,10 +247,12 @@ public class GUIMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton closeButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel middlePanel;
+    private javax.swing.JComboBox roomChoice;
     private javax.swing.JLabel titleLabel;
-    private javax.swing.JLabel topLabel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 }

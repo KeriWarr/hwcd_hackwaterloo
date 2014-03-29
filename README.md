@@ -9,3 +9,6 @@ Hour 1 (10:30):
 
 Hour 2 (11:30):
 - Anthony: ditched C cause it's annoying as fuck
+
+Hour idk (3:30):
+- Anthony: dunno

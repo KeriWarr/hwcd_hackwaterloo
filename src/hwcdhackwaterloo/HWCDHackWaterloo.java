@@ -7,6 +7,8 @@ public class HWCDHackWaterloo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        String[] keys = new String[] {"data", "temperature_current_c", "ok"};
+        String ret = UWAPI.get("/weather/current", keys);
+        System.out.println(ret);
     }
 }

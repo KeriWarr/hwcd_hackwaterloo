@@ -1,8 +1,11 @@
 
 package hwcdhackwaterloo;
 
-import hwcdhackwaterloo.UWAPI.JSONPair;
-import java.util.ArrayList;
+import static hwcdhackwaterloo.UWAPI.getJSONData;
+import java.util.HashMap;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 public class HWCDHackWaterloo {
     
@@ -10,12 +13,18 @@ public class HWCDHackWaterloo {
      * @param args the command line arguments
      */
     public static void main(String[] args) { 
-        String[] keys = new String[] {"data", "temperature_current_c"};
-        String ret = UWAPI.get("/weather/current", keys);
-        System.out.println(ret);
+        String json = getJSONData("/buildings/list");
+        JSONObject obj = (JSONObject) JSONValue.parse(json);
+        JSONArray courses = (JSONArray) obj.get("data");
+        HashMap<String, double[]> coords = new HashMap<>();
+        for (Object course : courses) {
+            JSONObject courseBlock = (JSONObject) course;
+            double lat = Double.parseDouble(courseBlock.get("latitude").toString());
+            double longitude = Double.parseDouble(courseBlock.get("longitude").toString());
+            double[] someshit = {lat, longitude};
+            coords.put((String) courseBlock.get("building_code"), someshit);
+        }
         
-        //This comment added for your viewing pleasure by Daniel
-        //PS: I'm in.
-        //PPS: Eclipse is a pain in the bum
+        System.out.println(coords.get("AAC")[0]);
     }
 }

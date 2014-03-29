@@ -7,6 +7,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+//for testing
+//import java.util.Scanner;
+
 public class TimeAvailability {
 
 	// checkRoomAvailability(String, String, int, int)
@@ -71,9 +74,17 @@ public class TimeAvailability {
 		return 60*Integer.parseInt(time.substring(0, 2)) + Integer.parseInt(time.substring(3,5));
 	}
 	
-	public boolean inDay (String day, String lofd) {
+	public static boolean inDay (String day, String lofd) {
 		// determine if day is in lofd
-		return false;
+                boolean found = false;
+		for(int n = 0; n < (lofd.length()-day.length()+1);n++){
+                    
+                    if(day.equals(lofd.substring(n, n+day.length()))){
+                        found = true;
+                        //break;
+                    }
+                }
+                return found;
 	}
 	
 	public static void print_time_array (ArrayList<TimeBlock> list) {
@@ -93,6 +104,16 @@ public class TimeAvailability {
 		System.out.println(blocks.size());
 		print_time_array(blocks);   */
             //System.out.println("time to int:" + time_to_int("13:30"));
+            /*
+            Scanner keyboard = new Scanner(System.in);
+            String day;
+            String lofd;
+            for (int t = 0; t < 3;t++){
+                day = keyboard.next();
+                lofd = keyboard.next();
+                System.out.println("Result:"+inDay(day,lofd));
+                
+            }*/
                 
                 	
 }

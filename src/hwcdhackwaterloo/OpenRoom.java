@@ -9,11 +9,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * Finds the closest open room from various
  * calls to UWAPI, and computes distances
  * 
  * Back-end of GUI
+ * 
+ * Coupled with Neil's Time Availability Function
  * 
  * @author: DanielHopper
  * 
@@ -85,6 +92,12 @@ public class OpenRoom {
 		
 	}
 	
+	
+	//this is an all-around method for doing all the room business
+	//it only needs one parameter, a string with the *ABBREVIATED*
+	//version of a building, and from that it will give the closest
+	//building, and how long an empty room in said building will
+	//be available for
 	public static void roomComp(String bldg)
 	{
 		String json = getJSONData("/buildings/list");
@@ -109,7 +122,6 @@ public class OpenRoom {
         
         for(int i = 0; i < bldgCount; i++)
         {
-        	System.out.println(i);
         	cpair = roomCoords.get(bldgsWithRooms[i]);
         	roomDist = findDistance(curCoords[0], curCoords[1], cpair[0], cpair[1]);
         	if(roomDist < closestDist)
@@ -121,8 +133,43 @@ public class OpenRoom {
         
         System.out.println(closestBldg);
         
-        
-      
+        // Begin room scan / iteration to neil's function
+ 	   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+        Calendar cal = Calendar.getInstance();
+ 	   int hour = cal.get(Calendar.HOUR_OF_DAY);
+ 	   int min = cal.get(Calendar.MINUTE);
+ 	   int totalMins = (60*hour) + min;
+ 	   
+ 	   int day = cal.get(Calendar.DAY_OF_WEEK);
+ 	   String dayOfWeek;
+ 	   if(day==Calendar.MONDAY) dayOfWeek = "M";
+ 	   else if(day==Calendar.TUESDAY) dayOfWeek = "T";
+ 	   else if(day==Calendar.WEDNESDAY) dayOfWeek = "W";
+ 	   else if(day==Calendar.THURSDAY) dayOfWeek = "Th";
+ 	   else if(day==Calendar.FRIDAY) dayOfWeek = "F";
+ 	   else dayOfWeek = "S";
+ 	   
+ 	   int freeMins;
+ 	   
+ 	   for(int i = 0; i < 9001 ; i++)
+ 	   {
+ 		   freeMins = checkRoomAvailability(closestBldg, i, dayOfWeek, totalMins);
+ 		   if(freeMins>0)
+ 		   {
+ 			   System.out.println(closestBldg + " room " + i + " will be open for " + freeMins + " Minutes ");
+ 			   break;
+ 		   }
+ 	   }
+ 	   
+ 	   
+	}
+	
+	public static int checkRoomAvailability(String s, int i, String d, int m)
+	{
+		//this is a dummy method for testing
+		//remove when real version is done
+		return 1;
 	}
 
 }

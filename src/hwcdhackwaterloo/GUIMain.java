@@ -6,6 +6,7 @@
 package hwcdhackwaterloo;
 
 import static hwcdhackwaterloo.UWAPI.getJSONData;
+import hwcdhackwaterloo.OpenRoom;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -71,7 +72,8 @@ public class GUIMain extends javax.swing.JFrame {
         dayChoice = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         middlePanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        resultHeader = new javax.swing.JLabel();
+        result = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -124,7 +126,7 @@ public class GUIMain extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel1.setText("SEARCH FOR AVILABLE ROOMS");
+        jLabel1.setText("SEARCH FOR AVAILABLE ROOMS");
 
         roomChoice.setBackground(new java.awt.Color(200, 50, 100));
         roomChoice.addItem("MC");
@@ -223,10 +225,10 @@ public class GUIMain extends javax.swing.JFrame {
                         .addGap(135, 135, 135)
                         .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(93, 93, 93)
                 .addComponent(jLabel1)
-                .addGap(96, 96, 96))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,8 +254,11 @@ public class GUIMain extends javax.swing.JFrame {
         middlePanel.setBackground(new java.awt.Color(0, 129, 16));
         middlePanel.setForeground(new java.awt.Color(240, 240, 240));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18));
-        jLabel2.setForeground(new java.awt.Color(250, 250, 250));
+        resultHeader.setFont(new java.awt.Font("Tahoma", 0, 18));
+        resultHeader.setForeground(new java.awt.Color(250, 250, 250));
+
+        result.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        result.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout middlePanelLayout = new javax.swing.GroupLayout(middlePanel);
         middlePanel.setLayout(middlePanelLayout);
@@ -261,36 +266,38 @@ public class GUIMain extends javax.swing.JFrame {
             middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(middlePanelLayout.createSequentialGroup()
                 .addGap(84, 84, 84)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(resultHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(result, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         middlePanelLayout.setVerticalGroup(
             middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(middlePanelLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 175, Short.MAX_VALUE))
+                .addComponent(resultHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 46, Short.MAX_VALUE))
         );
 
         bottomPanel.setBackground(new java.awt.Color(159, 238, 0));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel4.setText("WIDGET PENDING");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel4.setText("BY: KERI WARR, ANTHONY CALANDRA, DANIEL HOPPER, NEIL DE VRIES");
 
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
         bottomPanelLayout.setHorizontalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
+                .addGap(0, 132, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -342,12 +349,15 @@ public class GUIMain extends javax.swing.JFrame {
             System.out.println("Date:"+monthNum+"/"+dayChoice.getSelectedItem());
             int randomNum = (int)(Math.random()*3);
             if (randomNum == 0) {
-                // property value not set
+                resultHeader.setText("THIS ROOM BE AVAILABLE!");
             } else if (randomNum == 1) {
-                jLabel2.setText("HERE IS YOUR DESTINATION:");
+                resultHeader.setText("HERE IS YOUR DESTINATION:");
             } else {
-                jLabel2.setText("WALK THIS WAY:");
+                resultHeader.setText("WALK THIS WAY:");
             }
+            String disp = "MC 2066";
+            result.setText(disp);
+            result.setFont(new java.awt.Font("Tahoma", 1, ((int)700/disp.length()))); 
         } catch (NumberFormatException nfe) {
             timeField.setText("Invalid");
         }
@@ -401,7 +411,6 @@ public class GUIMain extends javax.swing.JFrame {
     private javax.swing.JComboBox dayChoice;
     private javax.swing.JButton findButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -409,6 +418,8 @@ public class GUIMain extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel middlePanel;
     private javax.swing.JComboBox monthChoice;
+    private javax.swing.JLabel result;
+    private javax.swing.JLabel resultHeader;
     private javax.swing.JComboBox roomChoice;
     private javax.swing.JTextField timeField;
     private javax.swing.JLabel titleLabel;

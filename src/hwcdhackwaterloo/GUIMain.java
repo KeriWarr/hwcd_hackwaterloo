@@ -105,9 +105,9 @@ public class GUIMain extends javax.swing.JFrame {
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titleLabel)
-                .addGap(106, 106, 106)
+                .addGap(120, 120, 120)
                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         menuPanelLayout.setVerticalGroup(
@@ -267,16 +267,19 @@ public class GUIMain extends javax.swing.JFrame {
             .addGroup(middlePanelLayout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addComponent(resultHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(result, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(115, Short.MAX_VALUE))
+            .addGroup(middlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         middlePanelLayout.setVerticalGroup(
             middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(middlePanelLayout.createSequentialGroup()
                 .addComponent(resultHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 46, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         bottomPanel.setBackground(new java.awt.Color(159, 238, 0));
@@ -329,9 +332,9 @@ public class GUIMain extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonMouseClicked
 
     private void findButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_findButtonMouseReleased
-        System.out.println(roomChoice.getSelectedItem());
+
         try {
-            System.out.println(Integer.parseInt(timeField.getText()));
+            int time = Integer.parseInt(timeField.getText());
             Object month = monthChoice.getSelectedItem();
             int monthNum;
             if(month == "January") monthNum = 1;
@@ -355,7 +358,8 @@ public class GUIMain extends javax.swing.JFrame {
             } else {
                 resultHeader.setText("WALK THIS WAY:");
             }
-            String disp = "MC 2066";
+            OpenRoom res = new OpenRoom();
+            String disp = res.roomComp(roomChoice.getSelectedItem().toString(),time,monthNum,Integer.parseInt(dayChoice.getSelectedItem().toString()));
             result.setText(disp);
             result.setFont(new java.awt.Font("Tahoma", 1, ((int)700/disp.length()))); 
         } catch (NumberFormatException nfe) {

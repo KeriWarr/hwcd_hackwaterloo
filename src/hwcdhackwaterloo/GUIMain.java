@@ -6,6 +6,10 @@
 package hwcdhackwaterloo;
 
 import static hwcdhackwaterloo.UWAPI.getJSONData;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -118,6 +122,22 @@ public class GUIMain extends javax.swing.JFrame {
 
         roomChoice.setBackground(new java.awt.Color(150, 150, 150));
         roomChoice.addItem("MC");
+
+        roomChoice.addItemListener(new ItemListener(){
+            Object state = new Object();
+            //Object oldState = new Object();
+            Object oldState = roomChoice.getSelectedItem();
+            public void itemStateChanged(ItemEvent e){
+
+                state = e.getItem();
+                if(state != oldState){
+                    System.out.println("changed to:"+ state);
+                    // code here to pass info to openroom.java
+                }
+                oldState = state;
+
+            }
+        });
         String json = getJSONData("/buildings/list");
         JSONObject obj = (JSONObject) JSONValue.parse(json);
         JSONArray courses = (JSONArray) obj.get("data");

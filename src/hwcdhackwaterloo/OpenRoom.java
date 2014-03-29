@@ -61,7 +61,6 @@ public class OpenRoom {
 		
 		//Commented out block is a Console interface for testing findDistance function
 		
-		roomComp("RCH");
 	}
 	
 	public static double findDistance(double lat1, double lon1, double lat2, double lon2)
@@ -98,7 +97,7 @@ public class OpenRoom {
 	//version of a building, and from that it will give the closest
 	//building, and how long an empty room in said building will
 	//be available for
-	public static void roomComp(String bldg)
+	public static void roomComp(String bldg, int desiredTime, int month, int day)
 	{
 		String json = getJSONData("/buildings/list");
         JSONObject obj = (JSONObject) JSONValue.parse(json);
@@ -119,48 +118,83 @@ public class OpenRoom {
         double roomDist = 0.0;
         double closestDist = 9999999; //random high value
         String closestBldg = "";
-        
-        for(int i = 0; i < bldgCount; i++)
-        {
-        	cpair = roomCoords.get(bldgsWithRooms[i]);
-        	roomDist = findDistance(curCoords[0], curCoords[1], cpair[0], cpair[1]);
-        	if(roomDist < closestDist)
-        	{
-        		closestDist = roomDist;
-        		closestBldg = bldgsWithRooms[i];
-        	}
-        }
-        
-        System.out.println(closestBldg);
+        String[] ignoreRooms = new String[24];
+        int ignoreIndex = 0;
+        boolean roomFound = false;
         
         // Begin room scan / iteration to neil's function
  	   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
+ 	   
         Calendar cal = Calendar.getInstance();
+        cal.set(2014, month, day);
  	   int hour = cal.get(Calendar.HOUR_OF_DAY);
  	   int min = cal.get(Calendar.MINUTE);
  	   int totalMins = (60*hour) + min;
  	   
- 	   int day = cal.get(Calendar.DAY_OF_WEEK);
+ 	   int dayWeek = cal.get(Calendar.DAY_OF_WEEK);
  	   String dayOfWeek;
- 	   if(day==Calendar.MONDAY) dayOfWeek = "M";
- 	   else if(day==Calendar.TUESDAY) dayOfWeek = "T";
- 	   else if(day==Calendar.WEDNESDAY) dayOfWeek = "W";
- 	   else if(day==Calendar.THURSDAY) dayOfWeek = "Th";
- 	   else if(day==Calendar.FRIDAY) dayOfWeek = "F";
+ 	   if(dayWeek==Calendar.MONDAY) dayOfWeek = "M";
+ 	   else if(dayWeek==Calendar.TUESDAY) dayOfWeek = "T";
+ 	   else if(dayWeek==Calendar.WEDNESDAY) dayOfWeek = "W";
+ 	   else if(dayWeek==Calendar.THURSDAY) dayOfWeek = "Th";
+ 	   else if(dayWeek==Calendar.FRIDAY) dayOfWeek = "F";
  	   else dayOfWeek = "S";
+ 	  TimeAvailability cra = new TimeAvailability();
+ 	   int freeMins = 0;
  	   
- 	   int freeMins;
- 	   TimeAvailability cra = new TimeAvailability(); 
- 	   for(int i = 0; i < 9001 ; i++)
- 	   {
- 		   freeMins = cra.checkRoomAvailability(closestBldg, i, dayOfWeek, totalMins);
- 		   if(freeMins>=60)
- 		   {
- 			   System.out.println(closestBldg + " room " + i + " will be open for " + freeMins + " Minutes ");
- 			   break;
- 		   }
- 	   }
+        
+        while(!roomFound)
+        {
+        	for(int i = 0; i < bldgCount; i++)
+        	{
+        		if(Arrays.asList(ignoreRooms).contains(bldgsWithRooms[i]))
+        		{
+        			//this room has already been used
+        			//ignore and move onwards
+        		}
+        		else
+        		{
+        			cpair = roomCoords.get(bldgsWithRooms[i]);
+        			roomDist = findDistance(curCoords[0], curCoords[1], cpair[0], cpair[1]);
+        			if(roomDist < closestDist)
+        			{
+        				closestDist = roomDist;
+        				closestBldg = bldgsWithRooms[i];
+        			}
+        		}
+        	}
+        	
+        	ignoreRooms[ignoreIndex] = closestBldg; //if a re-iteration is necessary, ignore this room
+        	ignoreIndex++;
+        	
+        	for(int i = 99; i < 9001 ; i++)
+      	   	{
+      		   freeMins = cra.checkRoomAvailability(closestBldg, i, dayOfWeek, totalMins);
+      		   if(freeMins==-1)//end of day case
+      		   {
+      			   System.out.println(closestBldg + " room " + i + " will be open for the rest of the day");
+      			   roomFound = true;
+      			   break;
+      		   }
+      		   if(freeMins==-2)//weekend case
+      		   {
+      			   System.out.println("It's the weekend, everything is open!");
+      			   roomFound = true;
+      			   break;
+      		   }
+      		   if(freeMins>desiredTime)//everything else
+      		   {
+      			   System.out.println(closestBldg + " room " + i + " will be open for " + freeMins + " Minutes ");
+      			   roomFound = true;
+      			   break;
+      		   }
+      	   }
+        }
+        
+        System.out.println(closestBldg);
+        System.out.println("requested time: " + totalMins);
+
  	   
  	   
 	}

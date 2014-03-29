@@ -90,7 +90,7 @@ public class GUIMain extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 18)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(230, 230, 230));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        titleLabel.setText("HWCD hackWATERLOO");
+        titleLabel.setText("WaterLOOKup");
 
         closeButton.setBackground(new java.awt.Color(0, 0, 0));
         closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closeButtonAlt.png"))); // NOI18N
@@ -107,7 +107,7 @@ public class GUIMain extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titleLabel)
-                .addGap(120, 120, 120)
+                .addGap(156, 156, 156)
                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         menuPanelLayout.setVerticalGroup(

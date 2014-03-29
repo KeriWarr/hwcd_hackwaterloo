@@ -13,14 +13,14 @@ import javax.swing.Box;
  *
  * @author Keri
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class GUIMain extends javax.swing.JFrame {
 
     int posX = 0, posY = 0;
 
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public GUIMain() {
         initComponents();
         menuPanel.addMouseListener(new MouseAdapter() {
 
@@ -66,8 +66,8 @@ public class NewJFrame extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         titleLabel.setText("HWCD hackWATERLOO");
 
-        closeButton.setBackground(new java.awt.Color(240, 0, 0));
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hwcdhackwaterloo/closeButton.png"))); // NOI18N
+        closeButton.setBackground(new java.awt.Color(0, 0, 0));
+        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closeButtonAlt.png"))); // NOI18N
         closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 closeButtonMouseClicked(evt);
@@ -81,17 +81,18 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap(138, Short.MAX_VALUE)
                 .addComponent(titleLabel)
-                .addGap(103, 103, 103)
-                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106)
+                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         topPanel.setBackground(new java.awt.Color(255, 30, 50));
@@ -115,7 +116,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(topLabel)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         middlePanel.setBackground(new java.awt.Color(0, 153, 153));
@@ -165,7 +166,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bottomPanel, middlePanel, topPanel});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bottomPanel, middlePanel});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -191,20 +192,20 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NewJFrame myFrame = new NewJFrame();
+                GUIMain myFrame = new GUIMain();
                 myFrame.setVisible(true);
             }
         });

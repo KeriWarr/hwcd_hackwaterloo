@@ -97,7 +97,7 @@ public class OpenRoom {
 	//version of a building, and from that it will give the closest
 	//building, and how long an empty room in said building will
 	//be available for
-	public static void roomComp(String bldg, int desiredTime, int month, int day)
+	public String roomComp(String bldg, int desiredTime, int month, int day)
 	{
 		String json = getJSONData("/buildings/list");
         JSONObject obj = (JSONObject) JSONValue.parse(json);
@@ -173,29 +173,27 @@ public class OpenRoom {
       		   freeMins = cra.checkRoomAvailability(closestBldg, i, dayOfWeek, totalMins);
       		   if(freeMins==-1)//end of day case
       		   {
-      			   System.out.println(closestBldg + " room " + i + " will be open for the rest of the day");
       			   roomFound = true;
-      			   break;
+      			   return closestBldg + " room " + i + " will be open for the rest of the day";
+      			 
       		   }
       		   if(freeMins==-2)//weekend case
       		   {
-      			   System.out.println("It's the weekend, everything is open!");
       			   roomFound = true;
-      			   break;
+      			   return "It's the weekend, everything is open!";
+      			 
       		   }
       		   if(freeMins>desiredTime)//everything else
       		   {
-      			   System.out.println(closestBldg + " room " + i + " will be open for " + freeMins + " Minutes ");
       			   roomFound = true;
-      			   break;
+      			   return closestBldg + " room " + i + " will be open for " + freeMins + " Minutes ";
+      			   
       		   }
       	   }
         }
         
-        System.out.println(closestBldg);
-        System.out.println("requested time: " + totalMins);
-
- 	   
+        return "NULL";
+		
  	   
 	}
 	

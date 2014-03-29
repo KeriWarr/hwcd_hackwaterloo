@@ -8,7 +8,7 @@ import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-
+import hwcdhackwaterloo.TimeAvailability;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -151,11 +151,11 @@ public class OpenRoom {
  	   else dayOfWeek = "S";
  	   
  	   int freeMins;
- 	   
+ 	   TimeAvailability cra = new TimeAvailability(); 
  	   for(int i = 0; i < 9001 ; i++)
  	   {
- 		   freeMins = checkRoomAvailability(closestBldg, i, dayOfWeek, totalMins);
- 		   if(freeMins>0)
+ 		   freeMins = cra.checkRoomAvailability(closestBldg, i, dayOfWeek, totalMins);
+ 		   if(freeMins>=60)
  		   {
  			   System.out.println(closestBldg + " room " + i + " will be open for " + freeMins + " Minutes ");
  			   break;
@@ -165,11 +165,6 @@ public class OpenRoom {
  	   
 	}
 	
-	public static int checkRoomAvailability(String s, int i, String d, int m)
-	{
-		//this is a dummy method for testing
-		//remove when real version is done
-		return 1;
-	}
+	
 
 }

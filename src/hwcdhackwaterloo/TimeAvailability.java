@@ -17,14 +17,20 @@ public class TimeAvailability {
 	// returns 0 if the room is unavailable
 	// otherwise, returns the number of hours said room is available for
 	public int checkRoomAvailability(String building, int room_num, String day, int min) {
-
-        String json = getJSONData("/buildings/" + building + "/" + room_num + "/courses");
-        JSONObject obj = (JSONObject) JSONValue.parse(json);
+        //System.out.println("/buildings/" + building + "/" + room_num + "/courses");
+        String json1 = getJSONData("/buildings/" + building + "/" + room_num + "/courses");
+        JSONObject obj = (JSONObject) JSONValue.parse(json1);
+        JSONObject meta = (JSONObject) obj.get("meta");
         JSONArray courses = (JSONArray) obj.get("data");
         ArrayList<TimeBlock> booked = new ArrayList<TimeBlock>();
 
+        if(meta.get("message").toString().equals("No data returned")){
+            return 0;
+        }
+        System.out.println("tits"+json1);
         for (Object course : courses) {
             JSONObject courseBlock = (JSONObject) course;
+            //System.out.println("weekdays item:"+courseBlock.get("weekdays").toString());
             if (inDay(day, courseBlock.get("weekdays").toString())) {
                 int start_time = time_to_int(courseBlock.get("start_time").toString());
                 int end_time = time_to_int(courseBlock.get("end_time").toString());
@@ -37,7 +43,7 @@ public class TimeAvailability {
 	}
 	
 	// assuming no overlap in times, unless one time block starts at the same time but ends later
-	public static void insert_timeblock(ArrayList<TimeBlock> list, TimeBlock item) {
+	public void insert_timeblock(ArrayList<TimeBlock> list, TimeBlock item) {
             
 		boolean notAdded = true;
                 
@@ -69,12 +75,12 @@ public class TimeAvailability {
                 }
 	}
 	
-	public static int time_to_int (String time) {
+	public int time_to_int (String time) {
 		// change "XX:XX" -> minutes
 		return 60*Integer.parseInt(time.substring(0, 2)) + Integer.parseInt(time.substring(3,5));
 	}
 	
-	public static boolean inDay (String day, String lofd) {
+	public boolean inDay (String day, String lofd) {
 		// determine if day is in lofd
                 boolean found = false;
 		for(int n = 0; n < (lofd.length()-day.length()+1);n++){
@@ -83,6 +89,8 @@ public class TimeAvailability {
                         found = true;
                         //break;
                     }
+                    
+                    
                 }
                 return found;
 	}

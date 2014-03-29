@@ -95,7 +95,7 @@ public class UWAPI {
      * @param data Endpoint.
      * @return JSON formatted string.
      */
-    private static String getJSONData(String data) {
+    public static String getJSONData(String data) {
         url = url.replace("{data}", data);
         String json = "";
         try {

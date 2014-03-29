@@ -1,14 +1,19 @@
 
 package hwcdhackwaterloo;
 
-public class HWCDHackWaterloo {
+import hwcdhackwaterloo.UWAPI.JSONPair;
+import java.util.ArrayList;
 
+public class HWCDHackWaterloo {
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[] keys = new String[] {"data", "temperature_current_c"};
-        String ret = UWAPI.get("/weather/current", keys);
-        System.out.println(ret);
+        String[] keys = new String[] {"data"};
+        ArrayList<JSONPair> pairs = UWAPI.getPairs("/buildings/list", keys);
+        for (JSONPair pair : pairs) {
+            System.out.println("Key=" + pair.key + " Val=" + pair.value);
+        }
     }
 }

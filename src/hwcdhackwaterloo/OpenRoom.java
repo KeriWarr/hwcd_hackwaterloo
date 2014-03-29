@@ -111,7 +111,26 @@ public class OpenRoom {
             roomCoords.put((String) courseBlock.get("building_code"), coordPair);
         }
         
-        String[] bldgsWithRooms = {"AL","B1","B2","BMH","C2","CPH","DC","DWE","E2","E3","E6","EV1","EV2","EV3","ESC","HH","M3","MC","ML","OPT","PAS","PHY","QNC","RCH"};
+        // GET REST OF DATA IN A SAFER MANNER
+        // TODO
+        String[] bldgsWithRooms = {"AL","B1","B2","BMH","C2","CPH","DC","DWE","ESC","HH","M3","MC","ML","OPT"};
+        HashMap<String, int[]> building_rooms = new HashMap<>();
+        building_rooms.put("OPT", new int[] {124,309,347,401,402,420,440});
+        building_rooms.put("ML", new int[] {109,113,117,135,216,246,311,315,349});
+        building_rooms.put("MC", new int[] {1056,1085,2017,2034,2035,2038,2054,2065,2066,3003,3008,4020,4021,4040,
+        		4041,4042,4044,4045,4058,4059,4060,4061,4062,4063,4064,5158,6496});
+        building_rooms.put("M3", new int[] {1006,2101,3103,3127,4206});
+        building_rooms.put("HH", new int[] {119,123,124,138,139,150,159,180,227,259,280,334,336,344,345,373});
+        building_rooms.put("ESC", new int[] {104,149,319,342});
+        building_rooms.put("AL", new int[] {6,105,113,116,124,208,209,210,211});
+        building_rooms.put("B1", new int[] {169,266,271,273,370,374,378});
+        building_rooms.put("B2", new int[] {149,150,151,350,351,355});
+        building_rooms.put("BMH", new int[] {1005,1016,1048,1403,1621,1633,1703,2402,2420,2703,3023});
+        building_rooms.put("C2", new int[] {160,168,273,278});
+        building_rooms.put("CPH", new int[] {1333,1346,3602,3604,3607,3623,3679,3681,4333,4335});
+        building_rooms.put("DC", new int[] {1350,1351,2568,3313,3701});
+        building_rooms.put("DWE", new int[] {1501,1502,1513,1515,1518,2402,2527,2529,3509,3516,3517,3518,3519,3522});
+        
         int bldgCount  = bldgsWithRooms.length;
         double[] curCoords = roomCoords.get(bldg);
         double[] cpair;

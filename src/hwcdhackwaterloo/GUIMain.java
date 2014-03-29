@@ -64,6 +64,9 @@ public class GUIMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         roomChoice = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        timeField = new javax.swing.JTextField();
+        findButton = new javax.swing.JButton();
         middlePanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
@@ -97,7 +100,7 @@ public class GUIMain extends javax.swing.JFrame {
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
+                .addContainerGap(146, Short.MAX_VALUE)
                 .addComponent(titleLabel)
                 .addGap(106, 106, 106)
                 .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -120,7 +123,7 @@ public class GUIMain extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(250, 250, 250));
         jLabel1.setText("SEARCH FOR AVILABLE ROOMS");
 
-        roomChoice.setBackground(new java.awt.Color(150, 150, 150));
+        roomChoice.setBackground(new java.awt.Color(200, 50, 100));
         roomChoice.addItem("MC");
 
         roomChoice.addItemListener(new ItemListener(){
@@ -131,7 +134,7 @@ public class GUIMain extends javax.swing.JFrame {
 
                 state = e.getItem();
                 if(state != oldState){
-                    System.out.println("changed to:"+ state);
+                    //System.out.println("changed to:"+ state);
                     // code here to pass info to openroom.java
                 }
                 oldState = state;
@@ -153,21 +156,53 @@ public class GUIMain extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel3.setText("SELECT CLOSEST BUILDING YOU FUCK");
+        jLabel3.setText("WHAT'S DA CLOSEST BUILDIN TO YOU?");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(250, 250, 250));
+        jLabel5.setText("HOW LONG YOU WANNA HAVE A ROOM FOR?");
+
+        timeField.setBackground(new java.awt.Color(255, 160, 202));
+        timeField.setText("(minutes)");
+
+        findButton.setBackground(new java.awt.Color(255, 170, 202));
+        findButton.setText("FIND AVAILABLE ROOM!");
+        Object comboBoxState = roomChoice.getSelectedItem();
+        findButton.setActionCommand("FIND");
+        //findButton.addActionListener(this);
+        findButton.setToolTipText("Dooooo itttt!");
+
+        //pubic void actionPerformed(ActionEvent e){
+            //    if("FIND".equals(e.getActionCommand())){
+                //        System.out.println("Press registered.");
+                //    }
+            //}
+        findButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                findButtonMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap(109, Short.MAX_VALUE)
+                .addContainerGap(114, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(96, 96, 96))
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(roomChoice, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(roomChoice, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(timeField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
@@ -178,7 +213,13 @@ public class GUIMain extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roomChoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 92, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(timeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(findButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         middlePanel.setBackground(new java.awt.Color(0, 129, 16));
@@ -209,7 +250,7 @@ public class GUIMain extends javax.swing.JFrame {
         middlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(middlePanelLayout.createSequentialGroup()
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 149, Short.MAX_VALUE))
+            .addGap(0, 175, Short.MAX_VALUE))
     );
 
     bottomPanel.setBackground(new java.awt.Color(159, 238, 0));
@@ -222,40 +263,38 @@ public class GUIMain extends javax.swing.JFrame {
     bottomPanelLayout.setHorizontalGroup(
         bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(bottomPanelLayout.createSequentialGroup()
-            .addGap(20, 20, 20)
+            .addContainerGap()
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     bottomPanelLayout.setVerticalGroup(
         bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(bottomPanelLayout.createSequentialGroup()
-            .addGap(34, 34, 34)
-            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(33, Short.MAX_VALUE))
+            .addContainerGap()
+            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(62, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(middlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(topPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(1, 1, 1)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(middlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
-
-    layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bottomPanel, middlePanel, topPanel});
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -263,6 +302,15 @@ public class GUIMain extends javax.swing.JFrame {
     private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
         System.exit(0);
     }//GEN-LAST:event_closeButtonMouseClicked
+
+    private void findButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_findButtonMouseReleased
+        System.out.println(roomChoice.getSelectedItem());
+        try {
+            System.out.println(Integer.parseInt(timeField.getText()));
+        } catch (NumberFormatException nfe) {
+            timeField.setText("Invalid");
+        }
+    }//GEN-LAST:event_findButtonMouseReleased
 
     /**
      * @param args the command line arguments
@@ -303,13 +351,16 @@ public class GUIMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton closeButton;
+    private javax.swing.JButton findButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel middlePanel;
     private javax.swing.JComboBox roomChoice;
+    private javax.swing.JTextField timeField;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables

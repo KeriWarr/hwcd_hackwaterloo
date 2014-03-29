@@ -96,10 +96,11 @@ public class UWAPI {
      * @return JSON formatted string.
      */
     public static String getJSONData(String data) {
-        url = url.replace("{data}", data);
+    	String newURL = url.replace("{data}", data);
+    	System.out.println(newURL);
         String json = "";
         try {
-            URL apiRequest = new URL(url);
+            URL apiRequest = new URL(newURL);
             BufferedReader input = new BufferedReader(
                     new InputStreamReader(apiRequest.openStream()));
             String line;
@@ -111,9 +112,9 @@ public class UWAPI {
         } catch (MalformedURLException ex) {
             System.err.println(ex.getMessage());
         } catch (IOException ex) {
-            System.err.println(ex.getMessage());
+            System.err.println(ex.getMessage()) ;
         }
-        
+        //System.out.println(json);
         return json;
     }
     

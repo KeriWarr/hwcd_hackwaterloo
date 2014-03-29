@@ -61,7 +61,7 @@ public class OpenRoom {
 		
 		//Commented out block is a Console interface for testing findDistance function
 		
-		roomComp("SCH");
+		roomComp("RCH");
 	}
 	
 	public static double findDistance(double lat1, double lon1, double lat2, double lon2)

@@ -51,7 +51,6 @@ public class TimeAvailability {
 			list.add(item);
                         notAdded = false;                   
 			return;
-
 		}
 		
 		for (int i = 0; i < list.size(); i++) {

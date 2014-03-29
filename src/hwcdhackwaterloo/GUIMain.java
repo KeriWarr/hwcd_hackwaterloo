@@ -366,11 +366,13 @@ public class GUIMain extends javax.swing.JFrame {
             timeField.setText("Invalid");
         }
     }//GEN-LAST:event_findButtonMouseReleased
-
+static boolean added = false;
     private void monthChoiceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_monthChoiceItemStateChanged
-        for(int n = 1; n <= 31; n++){
+        
+        if(!added){for(int n = 1; n <= 31; n++){
             dayChoice.addItem(n);
-        }
+            added = true;
+        }}
     }//GEN-LAST:event_monthChoiceItemStateChanged
 
     /**

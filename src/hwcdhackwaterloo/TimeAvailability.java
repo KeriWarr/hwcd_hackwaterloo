@@ -23,8 +23,8 @@ public class TimeAvailability {
         for (Object course : courses) {
             JSONObject courseBlock = (JSONObject) course;
             if (inDay(day, courseBlock.get("weekdays").toString())) {
-                int start_time = time_to_string(courseBlock.get("start_time").toString());
-                int end_time = time_to_string(courseBlock.get("end_time").toString());
+                int start_time = time_to_int(courseBlock.get("start_time").toString());
+                int end_time = time_to_int(courseBlock.get("end_time").toString());
                 TimeBlock item = new TimeBlock(start_time, end_time);
                 insert_timeblock(booked, item);
             }
@@ -66,9 +66,9 @@ public class TimeAvailability {
                 }
 	}
 	
-	public int time_to_string (String time) {
+	public static int time_to_int (String time) {
 		// change "XX:XX" -> minutes
-		return 0;
+		return 60*Integer.parseInt(time.substring(0, 2)) + Integer.parseInt(time.substring(3,5));
 	}
 	
 	public boolean inDay (String day, String lofd) {
@@ -83,7 +83,7 @@ public class TimeAvailability {
 	}
 	
 	public static void main(String[] args) {
-                ///*        THIS SHIT WORKS NOW
+                /*        THIS SHIT WORKS NOW
 		ArrayList<TimeBlock> blocks = new ArrayList<TimeBlock>();
 		insert_timeblock(blocks, new TimeBlock(0,60));
 		insert_timeblock(blocks, new TimeBlock(65, 80));
@@ -91,7 +91,8 @@ public class TimeAvailability {
 		insert_timeblock(blocks, new TimeBlock(65, 85));
 		insert_timeblock(blocks, new TimeBlock(61, 63));
 		System.out.println(blocks.size());
-		print_time_array(blocks);   //*/
+		print_time_array(blocks);   */
+            //System.out.println("time to int:" + time_to_int("13:30"));
                 
                 	
 }

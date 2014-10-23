@@ -1,13 +1,13 @@
 hwcd_hackwaterloo
 =================
 
-A simple utility for finding the closest free room in a given building.
+A simple proof-of-concept University of Waterloo utility, which can be used for finding the closest unoccupied classroom for a specified period of time from your current location on campus.
 
 
 Future plans:
-- Convert the desktop application to a web application.
-- Get more building classroom data.
+- Convert the desktop application to a web application & mobile application.
+- Improve our data set.
 
-NOTE: requires internet connection to use
+
 
 Check out all the other hackathon submissions (and ours) here: http://hack-waterloo.challengepost.com/submissions
